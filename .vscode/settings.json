@@ -2,5 +2,8 @@
 	"typescript.tsdk": "node_modules/typescript/lib",
 	"typescript.enablePromptUseWorkspaceTsdk": true,
 	"cSpell.words": ["tailwind", "tailwindcss"],
-	"tailwindCSS.lint.invalidTailwindDirective": "ignore"
+	"tailwindCSS.lint.invalidTailwindDirective": "ignore",
+	"[prisma]": {
+		"editor.defaultFormatter": "Prisma.prisma"
+	}
 }
