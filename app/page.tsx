@@ -1,29 +1,48 @@
 /* eslint-disable @next/next/no-img-element */
-import { Inter } from "@next/font/google";
+import { Inter } from "next/font/google";
 import Header from "./components/header";
 import Card from "./components/restaurantcard";
 import Cards from "./components/restaurantcards";
-import { PrismaClient } from "@prisma/client";
-
+import { PrismaClient, cuisine, location, PRICE } from "@prisma/client";
 const inter = Inter({ subsets: ["latin"] });
 const prisma = new PrismaClient();
-// const Header = dynamic(() => import("./components/header"), { ssr: false });
 
-const fetchRestaurants = async () => {
-	const restaurants = await prisma.restaurant.findMany();
+export interface RestaurantCardType {
+	id: number;
+	name: string;
+	main_img: string;
+	cuisine: cuisine;
+	location: location;
+	price: PRICE;
+	slug: string;
+}
+
+const fetchRestaurants = async (): Promise<RestaurantCardType[]> => {
+	const restaurants = await prisma.restaurant.findMany({
+		select: {
+			id: true,
+			name: true,
+			main_img: true,
+			cuisine: true,
+			location: true,
+			price: true,
+			slug: true,
+		},
+	});
 
 	return restaurants;
 };
 
 export default async function Home() {
 	const restaurants = await fetchRestaurants();
-	console.log(restaurants);
 
 	return (
 		<main>
 			<Header />
 			<Cards>
-				<Card />
+				{restaurants.map((restaurant) => (
+					<Card key={restaurant.id} restaurant={restaurant} />
+				))}
 			</Cards>
 		</main>
 	);
