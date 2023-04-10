@@ -18,11 +18,11 @@ export default function ReservationCard() {
 					<div className="flex justify-between">
 						<div className="flex flex-col w-[48%]">
 							<label htmlFor="">Date</label>
-							<input type="date" className="py-3 border-b font-light" />
+							<input type="date" className="py-3  border-b font-light" />
 						</div>
 						<div className="flex flex-col w-[48%]">
 							<label htmlFor="">Time</label>
-							<select name="" id="" className="py-3 border-b font-light">
+							<select name="" id="" className="py-3.5 border-b font-light">
 								<option value="">7:30 AM</option>
 								<option value="">9:30 AM</option>
 							</select>

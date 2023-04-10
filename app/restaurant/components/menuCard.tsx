@@ -1,7 +1,7 @@
 import { Item } from "@prisma/client";
 
 export default function MenuCard({ item }: { item: Item }) {
-	console.log(item);
+	// console.log(item);
 
 	return (
 		<div className=" border rounded p-3 w-[49%] mb-3">
