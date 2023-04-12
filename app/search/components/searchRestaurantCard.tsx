@@ -1,13 +1,23 @@
-import { Restaurant } from "@prisma/client";
+import { PRICE, cuisine, location } from "@prisma/client";
 import Price from "../../components/price";
 
+type restLocations = {
+	id: number;
+	name: string;
+	main_img: string;
+	price: PRICE;
+	cuisine: cuisine;
+	location: location;
+	slug: string;
+};
+
 /* eslint-disable @next/next/no-img-element */
-export default function SearchRestaurantCard({ restaurants }: { restaurants: Restaurant[] }) {
+export default function SearchRestaurantCard({ restaurants }: { restaurants: restLocations[] }) {
 	return (
 		<>
-			{restaurants.map((restaurant) => {
+			{restaurants.map((restaurant, index) => {
 				return (
-					<div key={restaurant.id} className="border-b flex pb-5">
+					<div key={index} className="border-b flex pb-3">
 						<img src={restaurant.main_img} alt="" className=" w-48 rounded" />
 						<div className="pl-5">
 							<h2 className="text-3xl">{restaurant.name}</h2>
@@ -18,8 +28,8 @@ export default function SearchRestaurantCard({ restaurants }: { restaurants: Res
 							<div className="mb-9">
 								<div className="font-light flex text-reg">
 									<Price price={restaurant.price} />
-									<p className="mr-4">{restaurant.cuisine_id}</p>
-									<p className="mr-4">{restaurant.location_id}</p>
+									<p className="mr-4">{restaurant.cuisine.name}</p>
+									<p className="mr-4">{restaurant.location.name}</p>
 								</div>
 							</div>
 							<div className="text-red-600">

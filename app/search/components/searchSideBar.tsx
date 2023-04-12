@@ -1,15 +1,45 @@
-export default function SearchSideBar() {
+import { PrismaClient } from "@prisma/client";
+
+export default function SearchSideBar({ searchParams }: { searchParams: { searchParams: string } }) {
+	// hard code list
+	const varCity = searchParams;
+
+	const cities: string[] = ["Toronto", "Ottowa", "Montreal", "Hamilton", "Kingston", "Niagara"];
+
+	const isMatch = (varCity: { searchParams: string }, name: string, key: number) => {
+		varCity;
+		name.toLowerCase();
+
+		console.log(name, varCity);
+
+		if (varCity === name) {
+			console.log("hi");
+			return <p className="font-bold text-reg ">{name}</p>;
+		} else {
+			return (
+				<p key={key} className="font-light text-reg">
+					{name}
+				</p>
+			);
+		}
+	};
+
 	return (
 		<>
 			<div className="w-1/5 mt-1">
 				<div className="border-b pb-4">
 					<h1 className="mb-2">Region</h1>
-					<p className="font-light text-reg">Toronto</p>
+					<>
+						{cities.map((item, index) => {
+							return isMatch(varCity, item, index);
+						})}
+					</>
+					{/* <p className="font-light text-reg">Toronto</p>
 					<p className="font-light text-reg">Ottawa</p>
 					<p className="font-light text-reg">Montreal</p>
 					<p className="font-light text-reg">Hamilton</p>
 					<p className="font-light text-reg">Kingston</p>
-					<p className="font-light text-reg">Niagara</p>
+					<p className="font-light text-reg">Niagara</p> */}
 				</div>
 				<div className="border-b pb-4 mt-3">
 					<h1 className="mb-2">Cuisine</h1>
