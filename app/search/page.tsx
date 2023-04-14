@@ -56,7 +56,7 @@ export default async function Search({ searchParams }: { searchParams: { city: s
 		<>
 			<Header />
 			<div className="flex py-4 m-auto w-3/4 justify-between items-start">
-				<SearchSideBar restaurants={restLocations} />
+				<SearchSideBar restaurants={restLocations} searchParams={searchParams.city} />
 				<SearchCardContainer>
 					{restLocations.length ? (
 						<SearchRestaurantCard restaurants={restLocations} />

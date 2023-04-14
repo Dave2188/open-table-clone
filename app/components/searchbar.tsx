@@ -13,6 +13,7 @@ export default function SearchBar({ restaurants }: { restaurants: { name: string
 	const [location, setLocation] = useState<string>("");
 
 	// TODO filter for name or city
+	// add keypress for enter
 	const handleClick = () => {
 		if (!location) {
 			const message = document.getElementsByClassName("searchInputHeader");
