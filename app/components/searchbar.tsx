@@ -2,12 +2,33 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { PRICE, Restaurant } from "@prisma/client";
 
 interface HTMLCollectionOf {
 	placeholder: string;
 }
 
-export default function SearchBar({ restaurants }: { restaurants: { name: string; location: { name: string } }[] }) {
+type restLocations = {
+	location: {
+		id: number;
+		name: string;
+		Created_at: Date;
+		updated_at: Date;
+	};
+	id: number;
+	name: string;
+	main_img: string;
+	price: PRICE;
+	cuisine: {
+		id: number;
+		name: string;
+		Created_at: Date;
+		updated_at: Date;
+	};
+	slug: string;
+};
+
+export default function SearchBar({ restLocations }: { restLocations: restLocations[] }) {
 	const router = useRouter();
 
 	const [location, setLocation] = useState<string>("");
@@ -15,13 +36,16 @@ export default function SearchBar({ restaurants }: { restaurants: { name: string
 	// TODO filter for name or city
 	// add keypress for enter
 	const handleClick = () => {
-		if (!location) {
+		if (location === "") {
 			const message = document.getElementsByClassName("searchInputHeader");
 			message[0].setAttribute("placeholder", "Please enter search term");
+			return;
 		}
 
 		router.push(`/search?city=${location}`);
 	};
+
+	const locations = ["ottawa", "toronto", "niagara"];
 
 	return (
 		<>
@@ -35,12 +59,13 @@ export default function SearchBar({ restaurants }: { restaurants: { name: string
 					onChange={(e) => {
 						setLocation(e.target.value);
 					}}
+					enterKeyHint="enter"
+					onKeyDown={handleClick}
 				/>
 				<datalist id="searchData">
-					{restaurants.map((item, index) => (
+					{locations.map((item, index) => (
 						<li key={index}>
-							<option value={item.name} />
-							<option value={item.location.name} />
+							<option value={item} />
 						</li>
 					))}
 				</datalist>
