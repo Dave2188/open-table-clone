@@ -38,7 +38,7 @@ export default async function Home() {
 
 	return (
 		<main>
-			<Header />
+			<Header restLocations={restaurants} />
 			<Cards>
 				{restaurants.map((restaurant) => (
 					<Card key={restaurant.id} restaurant={restaurant} />
