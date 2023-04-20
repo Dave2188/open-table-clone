@@ -26,16 +26,16 @@ const fetchRestaurantsByQuery = (city: string | undefined, cuisine: string | und
 			select: {
 				id: true,
 				name: true,
-				Created_at: false,
-				updated_at: false,
+				// Created_at: false,
+				// updated_at: false,
 			},
 		},
 		location: {
 			select: {
 				id: true,
 				name: true,
-				Created_at: false,
-				updated_at: false,
+				// Created_at: false,
+				// updated_at: false,
 			},
 		},
 		slug: true,
@@ -72,7 +72,7 @@ export default async function Search({
 	searchParams: { city: string; cuisine: string; price: PRICE };
 }) {
 	const restLocations = await fetchRestaurantsByQuery(searchParams.city, searchParams.cuisine, searchParams.price);
-	// console.log(searchParams);
+	// console.log(restLocations);
 	return (
 		<>
 			<Header restLocations={restLocations} />

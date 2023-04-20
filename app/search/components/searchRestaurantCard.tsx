@@ -2,18 +2,39 @@ import { PRICE, cuisine, location } from "@prisma/client";
 import Price from "../../components/price";
 
 // can interface Restaurant here
-type restLocations = {
+interface Restaurant {
+	price: PRICE;
 	id: number;
 	name: string;
 	main_img: string;
-	price: PRICE;
-	cuisine: cuisine;
-	location: location;
+	cuisine: {
+		id: number;
+		name: string;
+	};
+	location: {
+		id: number;
+		name: string;
+	};
 	slug: string;
-};
+}
+// const restLocations: {
+// 	price: PRICE;
+// 	id: number;
+// 	name: string;
+// 	main_img: string;
+// 	cuisine: {
+// 		id: number;
+// 		name: string;
+// 	};
+// 	location: {
+// 		id: number;
+// 		name: string;
+// 	};
+// 	slug: string;
+// }[];
 
 /* eslint-disable @next/next/no-img-element */
-export default function SearchRestaurantCard({ restaurants }: { restaurants: restLocations[] }) {
+export default function SearchRestaurantCard({ restaurants }: { restaurants: Restaurant[] }) {
 	return (
 		<>
 			{restaurants.map((restaurant, index) => {

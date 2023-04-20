@@ -1,15 +1,27 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import { RestaurantCardType } from "../page";
-import { cuisine, Restaurant, PRICE } from "@prisma/client";
+import { cuisine, Restaurant, PRICE, Review } from "@prisma/client";
 import Price from "./price";
 
 interface Props {
 	restaurant: RestaurantCardType;
+	reviews: Review[];
 	key: Number;
 }
 
-export default function Card({ restaurant }: Props) {
+export default function Card({ restaurant, reviews }: Props) {
+	const starRating = (reviews: Review[]) => {
+		let sum = 0;
+		reviews.forEach((element: Review) => (sum += element.rating));
+		sum = Math.round(sum / reviews.length);
+		if (sum <= 0) {
+			return 0;
+		} else {
+			return sum;
+		}
+	};
+
 	return (
 		<>
 			<Link href={`/restaurant/${restaurant.slug}`}>
@@ -18,8 +30,8 @@ export default function Card({ restaurant }: Props) {
 					<div className="p-1">
 						<h3 className="font-bold text-2xl mb-2">{restaurant.name}</h3>
 						<div className="flex items-start">
-							<div className="flex mb-2">*****</div>
-							<p className="ml-2">77 reviews</p>
+							<div className="flex mb-2 ">{starRating(reviews)} stars</div>
+							<p className="ml-2">{restaurant.reviews.length} reviews</p>
 						</div>
 						<div className="flex text-reg font-light capitalize">
 							<p className=" mr-3">{restaurant.cuisine.name}</p>

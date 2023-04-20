@@ -12,8 +12,6 @@ type restLocations = {
 	location: {
 		id: number;
 		name: string;
-		Created_at: Date;
-		updated_at: Date;
 	};
 	id: number;
 	name: string;
@@ -22,8 +20,6 @@ type restLocations = {
 	cuisine: {
 		id: number;
 		name: string;
-		Created_at: Date;
-		updated_at: Date;
 	};
 	slug: string;
 };

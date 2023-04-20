@@ -9,12 +9,12 @@ type Data = {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
 	//   await prisma.table.deleteMany();
-	// await prisma.review.deleteMany();
+	await prisma.review.deleteMany();
 	await prisma.item.deleteMany();
 	await prisma.restaurant.deleteMany();
 	await prisma.location.deleteMany();
 	await prisma.cuisine.deleteMany();
-	// await prisma.user.deleteMany();
+	await prisma.user.deleteMany();
 
 	await prisma.location.createMany({
 		data: [{ name: "ottawa" }, { name: "toronto" }, { name: "niagara" }],
@@ -944,7 +944,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 			last_name: "Harb",
 			email: "laith@hotmail.com",
 			city: "ottawa",
-			password: "$2b$10$I8xkU2nQ8EAHuVOdbMy9YO/.rSU3584Y.H4LrpIujGNDtmny9FnLu",
+			// password: "$2b$10$I8xkU2nQ8EAHuVOdbMy9YO/.rSU3584Y.H4LrpIujGNDtmny9FnLu",
 			phone: "1112223333",
 		},
 	});
@@ -955,7 +955,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 			last_name: "Allen",
 			email: "josh@hotmail.com",
 			city: "toronto",
-			password: "$2b$10$I8xkU2nQ8EAHuVOdbMy9YO/.rSU3584Y.H4LrpIujGNDtmny9FnLu",
+			// password: "$2b$10$I8xkU2nQ8EAHuVOdbMy9YO/.rSU3584Y.H4LrpIujGNDtmny9FnLu",
 			phone: "1112223333",
 		},
 	});
@@ -966,7 +966,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 			last_name: "James",
 			email: "lebron@hotmail.com",
 			city: "niagara",
-			password: "$2b$10$I8xkU2nQ8EAHuVOdbMy9YO/.rSU3584Y.H4LrpIujGNDtmny9FnLu",
+			// password: "$2b$10$I8xkU2nQ8EAHuVOdbMy9YO/.rSU3584Y.H4LrpIujGNDtmny9FnLu",
 			phone: "1112223333",
 		},
 	});
@@ -977,7 +977,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 			last_name: "Marksom",
 			email: "cassidy@hotmail.com",
 			city: "toronto",
-			password: "$2b$10$I8xkU2nQ8EAHuVOdbMy9YO/.rSU3584Y.H4LrpIujGNDtmny9FnLu",
+			// password: "$2b$10$I8xkU2nQ8EAHuVOdbMy9YO/.rSU3584Y.H4LrpIujGNDtmny9FnLu",
 			phone: "1112223333",
 		},
 	});
