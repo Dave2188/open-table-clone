@@ -2,7 +2,7 @@ import Header from "../components/header";
 import SearchSideBar from "./components/searchSideBar";
 import SearchRestaurantCard from "./components/searchRestaurantCard";
 import SearchCardContainer from "./components/searchCardContainer";
-import { PRICE, PrismaClient, Review, cuisine, location } from "@prisma/client";
+import { PRICE, PrismaClient, cuisine, location } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -15,6 +15,10 @@ interface Restaurant {
 	location: location;
 	reviews: Review;
 	slug: string;
+}
+
+interface Review {
+	rating: [];
 }
 
 export default async function Search({
@@ -58,6 +62,11 @@ const fetchRestaurantsByQuery = (city: string | undefined, cuisine: string | und
 			select: {
 				id: true,
 				name: true,
+			},
+		},
+		reviews: {
+			select: {
+				rating: true,
 			},
 		},
 		slug: true,
