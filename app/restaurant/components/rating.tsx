@@ -11,14 +11,14 @@ export default function Rating({ reviews }: { reviews: reviews }) {
 					<p className="text-reg ml-3">{stars}</p>
 				</div>
 				<div>
-					<p className="text-reg ml-4">600 Reviews</p>
+					<p className="text-reg ml-4">{reviews.length} Reviews</p>
 				</div>
 			</div>
 		</>
 	);
 }
 
-const starString = (stars: number) => {
+export const starString = (stars: number) => {
 	let string = "";
 	for (let i = 1; i <= stars; i++) {
 		string += "*";

@@ -60,7 +60,7 @@ export default async function RestaurantDetails({ params }: { params: { slug: st
 				<Rating reviews={restaurant.reviews} />
 				<RestaurantDescription description={restaurant.description} />
 				<PhotoBlock images={restaurant.images} />
-				<Reviews />
+				<Reviews reviews={restaurant.reviews} />
 			</div>
 			<ReservationCard />
 		</>
