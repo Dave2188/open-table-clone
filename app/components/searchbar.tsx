@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { PRICE, Restaurant } from "@prisma/client";
+import { PRICE } from "@prisma/client";
 
 interface HTMLCollectionOf {
 	placeholder: string;

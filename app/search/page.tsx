@@ -6,28 +6,12 @@ import { PRICE, PrismaClient, cuisine, location } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-interface Restaurant {
-	id: number;
-	name: string;
-	main_img: string;
-	price: PRICE;
-	cuisine: cuisine;
-	location: location;
-	reviews: Review;
-	slug: string;
-}
-
-interface Review {
-	rating: [];
-}
-
 export default async function Search({
 	searchParams,
 }: {
 	searchParams: { city: string; cuisine: string; price: PRICE };
 }) {
 	const restLocations = await fetchRestaurantsByQuery(searchParams.city, searchParams.cuisine, searchParams.price);
-	// console.log(restLocations);
 	return (
 		<>
 			<Header restLocations={restLocations} />
@@ -95,3 +79,24 @@ const fetchRestaurantsByQuery = (city: string | undefined, cuisine: string | und
 		select,
 	});
 };
+
+export interface Restaurant {
+	id: number;
+	name: string;
+	main_img: string;
+	price: PRICE;
+	cuisine: {
+		id: number;
+		name: string;
+	};
+	location: {
+		id: number;
+		name: string;
+	};
+	reviews: Review;
+	slug: string;
+}
+
+interface Review {
+	rating: [];
+}

@@ -1,5 +1,6 @@
 import { reviews } from "../../page";
 import { starRating } from "../../components/restaurantcard";
+import Stars from "../../components/stars";
 
 export default function Rating({ reviews }: { reviews: reviews }) {
 	let stars = starRating(reviews);
@@ -7,7 +8,7 @@ export default function Rating({ reviews }: { reviews: reviews }) {
 		<>
 			<div className="flex items-end">
 				<div className="ratings mt-2 flex items-center">
-					<p>{starString(stars)}</p>
+					<Stars reviews={reviews} />
 					<p className="text-reg ml-3">{stars}</p>
 				</div>
 				<div>
