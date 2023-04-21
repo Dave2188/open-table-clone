@@ -3,19 +3,23 @@ import { Inter } from "next/font/google";
 import Header from "./components/header";
 import Card from "./components/restaurantcard";
 import Cards from "./components/restaurantcards";
-import { PrismaClient, cuisine, location, PRICE, Review } from "@prisma/client";
+import { PrismaClient, cuisine, location, PRICE, Review, Restaurant } from "@prisma/client";
 const inter = Inter({ subsets: ["latin"] });
 const prisma = new PrismaClient();
 
-export interface RestaurantCardType {
-	id: number;
-	name: string;
-	main_img: string;
-	cuisine: cuisine;
-	location: location;
-	price: PRICE;
-	slug: string;
-	reviews: Review[];
+export default async function Home() {
+	const restaurants = await fetchRestaurants();
+
+	return (
+		<main>
+			<Header restLocations={restaurants} />
+			<Cards>
+				{restaurants.map((restaurant) => (
+					<Card key={restaurant.id} restaurant={restaurant} reviews={restaurant.reviews} />
+				))}
+			</Cards>
+		</main>
+	);
 }
 
 const fetchRestaurants = async (): Promise<RestaurantCardType[]> => {
@@ -35,24 +39,29 @@ const fetchRestaurants = async (): Promise<RestaurantCardType[]> => {
 	return restaurants;
 };
 
-export default async function Home() {
-	const restaurants = await fetchRestaurants();
-
-	return (
-		<main>
-			<Header restLocations={restaurants} />
-			<Cards>
-				{restaurants.map((restaurant) => (
-					<Card key={restaurant.id} restaurant={restaurant} reviews={restaurant.reviews} />
-				))}
-			</Cards>
-		</main>
-	);
+export interface RestaurantCardType {
+	id: number;
+	name: string;
+	main_img: string;
+	cuisine: {
+		id: number;
+		name: string;
+	};
+	location: {
+		id: number;
+		name: string;
+	};
+	price: PRICE;
+	slug: string;
+	reviews: reviews;
 }
 
-// const sum = (a:number,b: number) => {
-//   let sum =	a + b
-//   return sum;
-// }
-
-// sum(2,5) //?
+export type reviews = {
+	id: number;
+	first_name: string;
+	last_name: string;
+	text: string;
+	rating: number;
+	restaurant_id: number;
+	user_id: number;
+}[];

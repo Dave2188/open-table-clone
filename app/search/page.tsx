@@ -2,7 +2,7 @@ import Header from "../components/header";
 import SearchSideBar from "./components/searchSideBar";
 import SearchRestaurantCard from "./components/searchRestaurantCard";
 import SearchCardContainer from "./components/searchCardContainer";
-import { PRICE, PrismaClient, cuisine, location } from "@prisma/client";
+import { PRICE, PrismaClient, Review, cuisine, location } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -13,58 +13,9 @@ interface Restaurant {
 	price: PRICE;
 	cuisine: cuisine;
 	location: location;
+	reviews: Review;
 	slug: string;
 }
-
-const fetchRestaurantsByQuery = (city: string | undefined, cuisine: string | undefined, price: PRICE | undefined) => {
-	const select = {
-		id: true,
-		name: true,
-		main_img: true,
-		price: true,
-		cuisine: {
-			select: {
-				id: true,
-				name: true,
-				// Created_at: false,
-				// updated_at: false,
-			},
-		},
-		location: {
-			select: {
-				id: true,
-				name: true,
-				// Created_at: false,
-				// updated_at: false,
-			},
-		},
-		slug: true,
-	};
-
-	if (!city) prisma.restaurant.findMany({ select });
-
-	city = city?.toLocaleLowerCase();
-	cuisine = cuisine?.toLocaleLowerCase();
-
-	return prisma.restaurant.findMany({
-		where: {
-			location: {
-				name: {
-					equals: city,
-				},
-			},
-			cuisine: {
-				name: {
-					equals: cuisine,
-				},
-			},
-			price: {
-				equals: price,
-			},
-		},
-		select,
-	});
-};
 
 export default async function Search({
 	searchParams,
@@ -90,3 +41,48 @@ export default async function Search({
 		</>
 	);
 }
+
+const fetchRestaurantsByQuery = (city: string | undefined, cuisine: string | undefined, price: PRICE | undefined) => {
+	const select = {
+		id: true,
+		name: true,
+		main_img: true,
+		price: true,
+		cuisine: {
+			select: {
+				id: true,
+				name: true,
+			},
+		},
+		location: {
+			select: {
+				id: true,
+				name: true,
+			},
+		},
+		slug: true,
+	};
+
+	if (!city) prisma.restaurant.findMany({ select });
+	city = city?.toLocaleLowerCase();
+	cuisine = cuisine?.toLocaleLowerCase();
+
+	return prisma.restaurant.findMany({
+		where: {
+			location: {
+				name: {
+					equals: city,
+				},
+			},
+			cuisine: {
+				name: {
+					equals: cuisine,
+				},
+			},
+			price: {
+				equals: price,
+			},
+		},
+		select,
+	});
+};

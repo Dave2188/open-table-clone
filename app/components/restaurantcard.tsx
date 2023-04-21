@@ -1,27 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import { RestaurantCardType } from "../page";
-import { cuisine, Restaurant, PRICE, Review } from "@prisma/client";
 import Price from "./price";
 
-interface Props {
-	restaurant: RestaurantCardType;
-	reviews: Review[];
-	key: Number;
-}
-
-export default function Card({ restaurant, reviews }: Props) {
-	const starRating = (reviews: Review[]) => {
-		let sum = 0;
-		reviews.forEach((element: Review) => (sum += element.rating));
-		sum = Math.round(sum / reviews.length);
-		if (sum <= 0) {
-			return 0;
-		} else {
-			return sum;
-		}
-	};
-
+export default function Card({ restaurant, reviews }: { restaurant: RestaurantCardType; reviews: thisReviews[] }) {
 	return (
 		<>
 			<Link href={`/restaurant/${restaurant.slug}`}>
@@ -45,3 +27,23 @@ export default function Card({ restaurant, reviews }: Props) {
 		</>
 	);
 }
+
+type thisReviews = {
+	id: number;
+	first_name: string;
+	last_name: string;
+	text: string;
+	rating: number;
+	restaurant_id: number;
+	user_id: number;
+};
+export const starRating = (reviews: thisReviews[]) => {
+	let sum = 0;
+	reviews.forEach((element: thisReviews) => (sum += element.rating));
+	sum = Math.round(sum / reviews.length);
+	if (sum <= 0) {
+		return 0;
+	} else {
+		return sum;
+	}
+};
