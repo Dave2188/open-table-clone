@@ -14,7 +14,7 @@ export default async function Home() {
 			<Header restLocations={restaurants} />
 			<Cards>
 				{restaurants.map((restaurant) => (
-					<Card key={restaurant.id} restaurant={restaurant} reviews={restaurant.reviews} />
+					<Card key={restaurant.id} restaurant={restaurant} />
 				))}
 			</Cards>
 		</main>

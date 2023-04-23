@@ -24,7 +24,7 @@ type restLocations = {
 	slug: string;
 };
 
-export default function SearchBar({ restLocations }: { restLocations: restLocations[] }) {
+export default function SearchBar({ restLocations }: { restLocations?: restLocations[] }) {
 	const router = useRouter();
 
 	const [location, setLocation] = useState<string>("");

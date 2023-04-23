@@ -8,12 +8,11 @@ import { calculateReviewRatingAverage } from "../utilities/calculateReviewRating
 
 export default function stars({ reviews }: { reviews: any[] }) {
 	const rating = calculateReviewRatingAverage(reviews);
-
 	const renderStars = () => {
 		let stars = [];
 
-		for (let i = 1; i <= 5; i++) {
-			const difference = parseFloat((rating - 1).toFixed(1));
+		for (let i = 0; i < 5; i++) {
+			const difference = parseFloat((rating - i).toFixed(1));
 			if (difference >= 1) stars.push(fullStar);
 			else if (difference < 1 && difference > 0) {
 				if (difference <= 0.2) stars.push(emptyStar);
@@ -21,7 +20,6 @@ export default function stars({ reviews }: { reviews: any[] }) {
 				else stars.push(fullStar);
 			} else stars.push(emptyStar);
 		}
-
 		return stars.map((star, index) => {
 			return <Image key={index} src={star} alt="" className="w-4 h-4 mr-1" />;
 		});

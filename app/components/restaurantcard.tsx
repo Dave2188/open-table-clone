@@ -4,9 +4,7 @@ import Stars from "./stars";
 import Price from "./price";
 import { PRICE } from "@prisma/client";
 
-import { calculateReviewRatingAverage } from "../utilities/calculateReviewRatingAverage";
-
-export default function Card({ restaurant, reviews }: { restaurant: thisRestaurant; reviews: thisReviews[] }) {
+export default function Card({ restaurant }: { restaurant: thisRestaurant }) {
 	return (
 		<>
 			<Link href={`/restaurant/${restaurant.slug}`}>
@@ -54,14 +52,4 @@ export type thisReviews = {
 	text: string;
 	rating: number;
 	restaurant_id: number;
-};
-export const starRating = (reviews: thisReviews[]) => {
-	let sum = 0;
-	reviews.forEach((element: thisReviews) => (sum += element.rating));
-	sum = Math.round(sum / reviews.length);
-	if (sum <= 0) {
-		return 0;
-	} else {
-		return sum;
-	}
 };

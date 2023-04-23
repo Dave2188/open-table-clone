@@ -18,8 +18,7 @@ type restLocations = {
 	slug: string;
 };
 
-export default function Header({ restLocations }: { restLocations: restLocations[] }) {
-	// console.log(restLocations);
+export default function Header({ restLocations }: { restLocations?: restLocations[] }) {
 	return (
 		<header>
 			<div className="h-64 bg-gradient-to-r from-[#0f1f47] to-[#5f6984] p-2">

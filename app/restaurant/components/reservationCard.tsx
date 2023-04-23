@@ -3,8 +3,8 @@
 export default function ReservationCard() {
 	return (
 		<>
-			<div className="w-[27%] relative text-reg">
-				<div className="fixed w-[15%] bg-white rounded p-3 shadow">
+			<div className="w-[30%] relative text-reg">
+				<div className="fixed w-[20%] bg-white rounded p-3 shadow">
 					<div className="text-center border-b pb-2 font-bold">
 						<h4 className="mr-7 text-lg">Make a Reservation</h4>
 					</div>
@@ -18,7 +18,7 @@ export default function ReservationCard() {
 					<div className="flex justify-between">
 						<div className="flex flex-col w-[48%]">
 							<label htmlFor="">Date</label>
-							<input type="date" className="py-3  border-b font-light" />
+							<input type="date" className="py-3  border-b font-light text-black" />
 						</div>
 						<div className="flex flex-col w-[48%]">
 							<label htmlFor="">Time</label>
