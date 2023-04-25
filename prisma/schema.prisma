@@ -82,9 +82,10 @@ model User {
   first_name String
   last_name  String
   city       String
-  email      String
+  email      String   @unique
   phone      String
   reviews    Review[]
+  password   String
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 }
